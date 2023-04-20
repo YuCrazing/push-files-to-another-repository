@@ -54,7 +54,7 @@ while [ $i -le $len1 ]; do
   word1=$(echo "$words1" | cut -d ' ' -f $i)
   word2=$(echo "$words2" | cut -d ' ' -f $i)
   mkdir -p "$CLONE_DIRECTORY/$word2"
-  cp -rvf "$word1" "$CLONE_DIRECTORY/$word2"
+  cp -rvf $word1 "$CLONE_DIRECTORY/$word2"
   i=$((i+1))
 done
 
