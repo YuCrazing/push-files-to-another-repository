@@ -43,8 +43,24 @@ ls -la "$CLONE_DIRECTORY"
 
 echo
 echo "##### Copying contents to git repo #####"
-mkdir -p "$CLONE_DIRECTORY/$DESTINATION_DIRECTORY"
-cp -rvf $SOURCE_FILES "$CLONE_DIRECTORY/$DESTINATION_DIRECTORY"
+
+# Create arrays by splitting the input strings by space
+IFS=' ' read -ra words1 <<< "$SOURCE_FILES"
+IFS=' ' read -ra words2 <<< "$DESTINATION_DIRECTORY"
+# Get the length of the arrays
+len1=${#words1[@]}
+len2=${#words2[@]}
+# Check if both input strings have the same number of words
+if [ "$len1" -ne "$len2" ]; then
+    echo "The input strings have different numbers of words."
+    exit 1
+fi
+# Loop through the arrays and echo each pair of substrings
+for ((i=0; i<$len1; i++)); do
+  mkdir -p "$CLONE_DIRECTORY/${words2[$i]}"
+  cp -rvf "${words1[$i]}" "$CLONE_DIRECTORY/${words2[$i]}"
+done
+
 cd "$CLONE_DIRECTORY"
 
 echo
