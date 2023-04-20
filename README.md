@@ -19,6 +19,7 @@ The branch name for the destination repository. Defaults to `master`.
 
 ### `destination-directory` (argument) [optional]
 The directory in the destination repository to copy the source files into. Defaults to the destination project root.
+
 **We support multipe destination directories. In this mode, the number of words in `source-files` must be exactly same with the number of destination directories**
 
 
