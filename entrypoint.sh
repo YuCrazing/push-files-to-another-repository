@@ -49,11 +49,13 @@ if [ "$len1" -ne "$len2" ]; then
 fi
 
 # Loop through the arrays and echo each pair of substrings
-for ((i=1; i<=$len1;i++)); do
+i=1
+while [ $i -le $len1 ]; do
   word1=$(echo "$words1" | cut -d ' ' -f $i)
   word2=$(echo "$words2" | cut -d ' ' -f $i)
   mkdir -p "$CLONE_DIRECTORY/$word2"
   cp -rvf "$word1" "$CLONE_DIRECTORY/$word2"
+  i=$((i+1))
 done
 
 cd "$CLONE_DIRECTORY"
