@@ -59,6 +59,7 @@ while [ $i -le $len1 ]; do
 done
 
 cd "$CLONE_DIRECTORY"
+sudo apt-get install git-lfs
 git-lfs install
 git-lfs pull
 
