@@ -59,6 +59,8 @@ while [ $i -le $len1 ]; do
 done
 
 cd "$CLONE_DIRECTORY"
+git-lfs install
+git-lfs pull
 
 echo
 echo "##### Adding git commit #####"
