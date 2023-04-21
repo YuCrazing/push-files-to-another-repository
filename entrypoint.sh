@@ -86,7 +86,7 @@ COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
 git status
 
 # don't commit if no changes were made
-git diff-index --quiet HEAD || git commit --message "$COMMIT_MESSAGE"
+git diff --quiet HEAD --staged || git commit --message "$COMMIT_MESSAGE"
 
 echo
 echo "##### Pushing git commit #####"
