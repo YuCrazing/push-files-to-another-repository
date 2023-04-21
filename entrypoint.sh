@@ -33,6 +33,9 @@ root_dir=$(pwd)
 cd "$CLONE_DIRECTORY"
 git-lfs install
 git-lfs pull
+git status
+git reset # Avoid git-lfs automatically adding files to staging area
+git status
 cd $root_dir
 
 
@@ -74,7 +77,7 @@ done
 
 cd "$CLONE_DIRECTORY"
 
-echo
+echo  
 echo "##### Adding git commit #####"
 
 ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
