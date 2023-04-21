@@ -29,6 +29,13 @@ git config --global user.name "$DESTINATION_USERNAME"
 git clone --single-branch --branch "$DESTINATION_BRANCH" "https://$API_TOKEN_GITHUB@github.com/$DESTINATION_USERNAME/$DESTINATION_REPOSITORY.git" "$CLONE_DIRECTORY"
 ls -la "$CLONE_DIRECTORY"
 
+root_dir=$(pwd)
+cd "$CLONE_DIRECTORY"
+git-lfs install
+git-lfs pull
+cd $root_dir
+
+
 echo
 echo "##### Copying contents to git repo #####"
 
@@ -55,12 +62,11 @@ while [ $i -le $len1 ]; do
   word2=$(echo "$words2" | cut -d ' ' -f $i)
   mkdir -p "$CLONE_DIRECTORY/$word2"
   cp -rvf $word1 "$CLONE_DIRECTORY/$word2"
+  git add "$CLONE_DIRECTORY/$word2"
   i=$((i+1))
 done
 
 cd "$CLONE_DIRECTORY"
-git-lfs install
-git-lfs pull
 
 echo
 echo "##### Adding git commit #####"
@@ -68,7 +74,6 @@ echo "##### Adding git commit #####"
 ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
 COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
 
-git add .
 git status
 
 # don't commit if no changes were made
