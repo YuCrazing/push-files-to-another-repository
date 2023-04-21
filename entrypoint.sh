@@ -60,9 +60,15 @@ i=1
 while [ $i -le $len1 ]; do
   word1=$(echo "$words1" | cut -d ' ' -f $i)
   word2=$(echo "$words2" | cut -d ' ' -f $i)
+  
   mkdir -p "$CLONE_DIRECTORY/$word2"
   cp -rvf $word1 "$CLONE_DIRECTORY/$word2"
-  git add "$CLONE_DIRECTORY/$word2"
+  
+  current_dir=$(pwd)
+  cd "$CLONE_DIRECTORY/$word2"
+  git add .
+  cd $current_dir
+  
   i=$((i+1))
 done
 
