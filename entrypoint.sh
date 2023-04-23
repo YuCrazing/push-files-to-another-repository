@@ -66,6 +66,7 @@ while [ $i -le $len1 ]; do
   
   mkdir -p "$CLONE_DIRECTORY/$word2"
   cp -rvf $word1 "$CLONE_DIRECTORY/$word2"
+  # cp -rvf $word1 "$CLONE_DIRECTORY/$word2" || true # silently failed if no files to copy
   
   current_dir=$(pwd)
   cd "$CLONE_DIRECTORY/$word2"
@@ -84,6 +85,7 @@ ORIGIN_COMMIT="https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
 COMMIT_MESSAGE="${COMMIT_MESSAGE/ORIGIN_COMMIT/$ORIGIN_COMMIT}"
 
 git status
+git pull
 
 # don't commit if no changes were made
 git diff --quiet HEAD --staged || git commit --message "$COMMIT_MESSAGE"
